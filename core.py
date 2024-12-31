@@ -146,7 +146,17 @@ def human_readable_size(size, decimal_places=2):
         size /= 1024.0
     return f"{size:.{decimal_places}f} {unit}"
 
+#-----------------------Emoji handler------------------------------------
 
+EMOJIS = ["🦁", "🐶", "🐼", "🐱", "👻", "🐻‍❄️", "☁️", "🚹", "🚺", "🐠", "🦋","🖕",]
+emoji_counter = 0  # Initialize a global counter
+
+def get_next_emoji():
+    global emoji_counter
+    emoji = EMOJIS[emoji_counter]
+    emoji_counter = (emoji_counter + 1) % len(EMOJIS)
+    return emoji
+    
 def time_name():
     date = datetime.date.today()
     now = datetime.datetime.now()
