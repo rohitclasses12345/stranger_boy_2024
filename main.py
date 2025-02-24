@@ -77,7 +77,7 @@ async def main():
 @bot.on_message(filters.command(["start"]))
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text(
-       "𝐇𝐞𝐥𝐥𝐨 ❤️\n\n◆〓◆ ❖ STRANGER https://envs.sh/B.mp4 ❖ ™ ◆〓◆\n\n❈ I Am A Bot For Download Links From Your **.TXT** File And Then Upload That File Om Telegram So Basically If You Want To Use Me First Send Me ⟰ /STRANGER Command And Then Follow Few Steps..", reply_markup=InlineKeyboardMarkup(
+       "𝐇𝐞𝐥𝐥𝐨 ❤️\n\n◆〓◆ ❖ STRANGER  https://envs.sh/25D.jpg ❖ ™ ◆〓◆\n\n❈ I Am A Bot For Download Links From Your **.TXT** File And Then Upload That File Om Telegram So Basically If You Want To Use Me First Send Me ⟰ /STRANGER Command And Then Follow Few Steps..", reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton("✜ 𝐉𝐨𝐢𝐧 𝐔𝐩𝐃𝐚𝐭𝐞 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ✜" ,url=f"https://t.me/Strangerboy27_bot_strangerboy") ],
@@ -178,7 +178,7 @@ async def account_login(bot: Client, m: Message):
     # Default credit message
     credit = "️ ⁪⁬⁮⁮⁮"
     if raw_text3 == 'de':
-        CR = '@SanjayKagra86🩷'
+        CR = '@Strangerboy27_bot_strangerboy 
     elif raw_text3:
         CR = raw_text3
     else:
@@ -191,7 +191,7 @@ async def account_login(bot: Client, m: Message):
     await editable.delete()
 
     thumb = input6.text
-    if thumb.startswith("http://") or thumb.startswith("https://"):
+    if thumb.startswith("http://") or thumb.startswith("https://envs.sh/25d.jpg"):
         getstatusoutput(f"wget '{thumb}' -O 'thumb.jpg'")
         thumb = "thumb.jpg"
     else:
