@@ -13,6 +13,7 @@ import cloudscraper
 import datetime
 import ffmpeg
 import logging 
+import telegraph
 
 from yt_dlp import YoutubeDL
 import yt_dlp as youtube_dl
