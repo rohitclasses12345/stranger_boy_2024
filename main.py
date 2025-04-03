@@ -183,25 +183,7 @@ async def account_login(bot: Client, m: Message):
         CR = raw_text3
     else:
         CR = credit
-        await editable.edit("** Enter Your APP Name or send `de` for use default**")
-
-    # Listen for the user's response
-    input5: Message = await bot.listen(editable.chat.id)
-
-    # Get the raw text from the user's message
-    raw_text6 = input6.text
-
-    # Delete the user's message after reading it
-    await input6.delete(True)
-     # Default credit message
-    credit = "️ ⁪⁬⁮⁮⁮"
-    if raw_text6 == 'de':
-        APP = 'APPLICATION'
-    elif raw_text6:
-        APP = raw_text6
-    else:
-        APP = credit
-        
+    
     await editable.edit("▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌ https://envs.sh/aHG.mp4 Now send the Thumb url if don't want thumbnail send no https://envs.sh/JLq.jpg")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
