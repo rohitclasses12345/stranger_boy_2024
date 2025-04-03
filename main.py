@@ -183,7 +183,25 @@ async def account_login(bot: Client, m: Message):
         CR = raw_text3
     else:
         CR = credit
-     
+        await editable.edit("** Enter Your APP Name or send `de` for use default**")
+
+    # Listen for the user's response
+    input5: Message = await bot.listen(editable.chat.id)
+
+    # Get the raw text from the user's message
+    raw_text6 = input6.text
+
+    # Delete the user's message after reading it
+    await input6.delete(True)
+     # Default credit message
+    credit = "️ ⁪⁬⁮⁮⁮"
+    if raw_text6 == 'de':
+        APP = 'APPLICATION'
+    elif raw_text6:
+        APP = raw_text6
+    else:
+        APP = credit
+        
     await editable.edit("▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌ https://envs.sh/aHG.mp4 Now send the Thumb url if don't want thumbnail send no https://envs.sh/JLq.jpg")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
@@ -270,21 +288,12 @@ async def account_login(bot: Client, m: Message):
                 cmd = f'yt-dlp --cookies youtube_cookies.txt -f "{ytf}" "{url}" -o "{name}".mp4'
 
             else:
-                cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
-
-            await editable.edit("**Enter your App name**")
-    input7: Message = await bot.listen(editable.chat.id)
-    raw_text7 = input7.text
-    await input7.delete(True)
-    if raw_text7 == 'd':
-        app_name = file_name
-    else:
-        app_name = raw_text7
+                cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"
         
             try:  
                 
-                cc = f'**🎥 VIDEO ID: {str(count).zfill(3)}.\n\n📄 Title: {name1} {res} ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌.mkv\n\n<code>🚶‍♂️🚶🧨🔖 Batch Name: {b_name} [{CR}]</pre>\n\n📥 Extracted By : [{CR}] (https://i.ibb.co/0p3pmkwn/Angel.jpg)\n\n**𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 ➤ https://i.ibb.co/m5b9jsD0/STRANGER-BOY.jpg **\n\n📲 APP NAME 📳 {app_name}\n'
-                cc1 = f'**📁 FILE ID: {str(count).zfill(3)}.\n\n📄 Title: {name1} ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌.pdf \n\n<code>🚶‍♂️🚶🧨🔖 Batch Name: {b_name} [{CR}]</pre>\n\n📥 Extracted By : [{CR}] (https://i.ibb.co/ccV44ZRS/STRANGER-BOY.jpg)\n\n**𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 ➤ https://i.ibb.co/ZzRjhXQp/STRANGER-BOY.jpg **\n\n📲 APP NAME 📳 {app_name}\n'
+                cc = f'**🎥 VIDEO ID: {str(count).zfill(3)}.\n\n📄 Title: {name1} {res} ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌.mkv\n\n🚶‍♂️🚶🧨🔖 Batch Name: {b_name}[{CR}]\n\n📥 Extracted By : [{CR}](https://i.ibb.co/0p3pmkwn/Angel.jpg)\n\n**𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 ➤ https://i.ibb.co/m5b9jsD0/STRANGER-BOY.jpg **\n\n📲 APP NAME 📳 {APP}\n'
+                cc1 = f'**📁 FILE ID: {str(count).zfill(3)}.\n\n📄 Title: {name1} ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌.pdf \n\n🚶‍♂️🚶🧨🔖 Batch Name: {b_name}[{CR}]\n\n📥 Extracted By : [{CR}](https://i.ibb.co/ccV44ZRS/STRANGER-BOY.jpg)\n\n**𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 ➤ https://i.ibb.co/ZzRjhXQp/STRANGER-BOY.jpg **\n\n📲 APP NAME 📳 {APP}\n'
                     
                 
                 if "drive" in url:
