@@ -274,8 +274,8 @@ async def account_login(bot: Client, m: Message):
 
             try:  
                 
-                cc = f'**🎥 VIDEO ID: {str(count).zfill(3)}.\n\n📄 Title: {name1} {res} ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌.mkv\n\n<pre><code>🚶‍♂️🚶🧨🔖 Batch Name: {b_name} [{CR}]</code></pre>\n\n📥 Extracted By : [{CR}] (https://i.ibb.co/0p3pmkwn/Angel.jpg)\n\n**𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 ➤ https://envs.sh/vbp.jpg **'
-                cc1 = f'**📁 FILE ID: {str(count).zfill(3)}.\n\n📄 Title: {name1} ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌.pdf \n\n<pre><code>🚶‍♂️🚶🧨🔖 Batch Name: {b_name} [{CR}]</code></pre>\n\n📥 Extracted By : [{CR}] (https://i.ibb.co/ccV44ZRS/STRANGER-BOY.jpg)\n\n**𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 ➤ https://envs.sh/vbp.jpg **'
+                cc = f'**🎥 VIDEO ID: {str(count).zfill(3)}.\n\n📲 APP NAME{name}\n\n📄 Title: {name1} {res} ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌.mkv\n\n<code>🚶‍♂️🚶🧨🔖 Batch Name: {b_name} [{CR}]</pre>\n\n📥 Extracted By : [{CR}] (https://i.ibb.co/0p3pmkwn/Angel.jpg)\n\n**𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 ➤ https://i.ibb.co/m5b9jsD0/STRANGER-BOY.jpg **'
+                cc1 = f'**📁 FILE ID: {str(count).zfill(3)}.\n\n📲 APP NAME{name}\n\n📄 Title: {name1} ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌.pdf \n\n<code>🚶‍♂️🚶🧨🔖 Batch Name: {b_name} [{CR}]</pre>\n\n📥 Extracted By : [{CR}] (https://i.ibb.co/ccV44ZRS/STRANGER-BOY.jpg)\n\n**𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 ➤ https://i.ibb.co/ZzRjhXQp/STRANGER-BOY.jpg **'
                     
                 
                 if "drive" in url:
