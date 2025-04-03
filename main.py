@@ -9,7 +9,7 @@ import subprocess
 import urllib.parse
 import yt_dlp
 import cloudscraper
-
+from bs4 import BeautifulSoup
 import core as helper
 from utils import progress_bar
 from vars import API_ID, API_HASH, BOT_TOKEN
@@ -74,74 +74,129 @@ async def main():
     except (KeyboardInterrupt, SystemExit):
         await stop_bot()
     
-@bot.on_message(filters.command(["start"]))
-async def account_login(bot: Client, m: Message):
-    editable = await m.reply_text(
-       "𝐇𝐞𝐥𝐥𝐨 ❤️\n\n◆〓◆ https://wdzone.jooker.live/file/3060?code=1b6e7e7b ❖ ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌ ❖ ™ ◆〓◆\n\n❈ I Am A Bot For Download Links From Your (STOP ✌️ BROKEN) **.TXT** File And Then Upload That File Om Telegram So Basically If You Want To Use Me First Send Me ⟰ /CRUSH Command And Then Follow Few Steps..", reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("✜ 𝐉𝐨𝐢𝐧 𝐔𝐩𝐃𝐚𝐭𝐞 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ✜" ,url=f"https://t.me/+EU-tiwyLZBMzY2Jl") ],
-                    [
-                    InlineKeyboardButton("✜ THE BOYS https://envs.sh/vbp.jpg ✜" ,url="https://t.me/Strangerboy27_bot_strangerboy") ],
-                    [
-                    InlineKeyboardButton("🦋 𝐅𝐨𝐥𝐥𝐨𝐰 𝐌𝐞 🦋" ,url="https://t.me/vhjjjoook") ]                               
-            ]))
 
-@bot.on_message(filters.command(["BROKEN"]))
+async def start_bot():
+    await bot.start()
+    print("Bot is up and running")
+
+async def stop_bot():
+    await bot.stop()
+
+async def main():
+    if WEBHOOK:
+        # Start the web server
+        app_runner = web.AppRunner(await web_server())
+        await app_runner.setup()
+        site = web.TCPSite(app_runner, "0.0.0.0", PORT)
+        await site.start()
+        print(f"Web server started on port {PORT}")
+
+    # Start the bot
+    await start_bot()
+
+    # Keep the program running
+    try:
+        while True:
+            await asyncio.sleep(3600)  # Run forever, or until interrupted
+    except (KeyboardInterrupt, SystemExit):
+        await stop_bot()
+        
+class Data:
+    START = (
+        "🌟🔆🔅 Welcome {0}! https://envs.sh/aN1.jpg 🔅🔆🌟\n\n"
+    )
+# Define the start command handler
+@bot.on_message(filters.command("start"))
+async def start(client: Client, msg: Message):
+    user = await client.get_me()
+    mention = user.mention
+    start_message = await client.send_message(
+        msg.chat.id,
+        Data.START.format(msg.from_user.mention)
+    )
+
+    await asyncio.sleep(1)
+    await start_message.edit_text(
+        Data.START.format(msg.from_user.mention) +
+        "Initializing Uploader bot... 🤖\n\n"
+        "Progress: [⬜⬜⬜⬜⬜⬜⬜⬜⬜] 0%\n\n"
+    )
+
+    await asyncio.sleep(1)
+    await start_message.edit_text(
+        Data.START.format(msg.from_user.mention) +
+        "Loading features... ⏳\n\n"
+        "Progress: [🟥🟥🟥⬜⬜⬜⬜⬜⬜] 25%\n\n"
+    )
+    
+    await asyncio.sleep(1)
+    await start_message.edit_text(
+        Data.START.format(msg.from_user.mention) +
+        "This may take a moment, sit back and relax! 😊\n\n"
+        "Progress: [🟧🟧🟧🟧🟧⬜⬜⬜⬜] 50%\n\n"
+    )
+
+    await asyncio.sleep(1)
+    await start_message.edit_text(
+        Data.START.format(msg.from_user.mention) +
+        "Checking Bot Status... 🔍\n\n"
+        "Progress: [🟨🟨🟨🟨🟨🟨🟨⬜⬜] 75%\n\n"
+    )
+
+    await asyncio.sleep(1)
+    await start_message.edit_text(
+        Data.START.format(msg.from_user.mention) +
+        "Checking status Ok... Send Command /txt **Bot Made BY —‌‌ 𝐈тᷟʑ‌꯭𓄂︪︫︠𓆩〭〬STRANGER BOY⍣⃪‌ ꭗ‌‌𝆺꯭𝅥𔘓༌🪽⎯꯭‌⎯꯭ ꯭   https://graph.org/file/34cb84d570e2c1f20a830-504f994d51b4240e1f.jpg **🔍\n\n"
+        "Progress:[🟩🟩🟩🟩🟩🟩🟩🟩🟩] 100%\n\n"
+    )
+
+@bot.on_message(filters.command(["stop"]) )
 async def restart_handler(_, m):
-    await m.reply_text("🤕 KAR LE BREAKUP TERA MERA SAAT YAHI TAK THA💔  ( JUDA HUM HO JAYE MANA )", True)
+    await m.reply_text("⚠️𝙎𝙏𝙊𝙋𝙋𝙀𝘿🤭", True)
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 
-
-@bot.on_message(filters.command(["CRUSH"]))
-async def account_login(bot: Client, m: Message):
-    editable = await m.reply_text('https://envs.sh/aHK.mp4) send a 𝐓𝐱𝐭 𝐅𝐢𝐥𝐞 𝐒𝐞𝐧𝐝 𝐇𝐞𝐫𝐞 ⏍')
+@bot.on_message(filters.command(["HERO"]) )
+async def txt_handler(bot: Client, m: Message):
+    editable = await m.reply_text(f"**🔏 Hi ➺꯭ ꯭𝅥‌꯭𝆬‌🦋⃪꯭ ─‌⃛┼ 𝞄⃕𝖋𝖋 STRANGER BOY🥵⃝⃝ᬽ꯭ ⃪꯭ ꯭𝅥‌꯭𝆬‌➺꯭⎯⎯᪵᪳  I am Poweful TXT Downloader📤 Bot. https://graph.org/file/e9eb5e5291209a162006d-a30a7a8cefa722c1ca.jpg **\n🔏**Send me the TXT file and wait. https://graph.org/file/1a43b0e6ab43ec562c6cf-29a3b54e63fef8780a.jpg **")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await input.delete(True)
-
-    path = f"./downloads/{m.chat.id}"
-    file_name = os.path.splitext(os.path.basename(x))[0]
-
-    try:
-       with open(x, "r") as f:
-           content = f.read().strip()
-    
-       lines = content.splitlines()
-       links = []
-    
-       for line in lines:
-           line = line.strip()
-           if line:
-               link = line.split("://", 1)
-               if len(link) > 1:
-                   links.append(link)
-    
-       os.remove(x)
-       print(len(links))
-    
+    file_name, ext = os.path.splitext(os.path.basename(x))
+    credit = f"—‌‌ 𝐈тᷟʑ‌꯭𓄂︪︫︠𓆩〭〬STRANGER BOY⍣⃪‌ ꭗ‌‌𝆺꯭𝅥𔘓༌🪽⎯꯭‌⎯꯭ ꯭"
+    token = f"eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6NTU2Njg5OTcsIm9yZ0lkIjoxMjg2LCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTgyOTA4MDA0NDAiLCJuYW1lIjoiUGFua2FqIFZlcm1hIiwiZW1haWwiOiJwa3Y0NDBAZ21haWwuY29tIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJkZWZhdWx0TGFuZ3VhZ2UiOiJFTiIsImNvdW50cnlDb2RlIjoiSU4iLCJjb3VudHJ5SVNPIjoiOTEiLCJ0aW1lem9uZSI6IkdNVCs1OjMwIiwiaXNEaXkiOnRydWUsIm9yZ0NvZGUiOiJlYWQiLCJpc0RpeVN1YmFkbWluIjowLCJmaW5nZXJwcmludElkIjoiYzgyMTI2NGRlYmxrOGZiM2UyYTYwYmRiZDRlZjcyYTNiOSIsImlhdCI6MTczOTI3MjE0NCwiZXhwIjoxNzM5ODc2OTQ0fQ.IjjTdF4WvNUocQvOb19UCIfQGxULo269Hj8TaMfwEezZs28Djhd6TNLPz1bGQ6"
+    try:    
+        with open(x, "r") as f:
+            content = f.read()
+        content = content.split("\n")
+        links = []
+        for i in content:
+            links.append(i.split("://", 1))
+        os.remove(x)
     except:
-           await m.reply_text("∝ 𝐈𝐧𝐯𝐚𝐥𝐢𝐝 𝐟𝐢𝐥𝐞 𝐢𝐧𝐩𝐮𝐭.")
-           os.remove(x)
-           return
+        await m.reply_text("Invalid file input.")
+        os.remove(x)
+        return
    
-    await editable.edit(f"∝ 𝐓𝐨𝐭𝐚𝐥 𝐋𝐢𝐧𝐤 𝐅𝐨𝐮𝐧𝐝 𝐀𝐫𝐞 🔗** **{len(links)}**\n\n (https://envs.sh/aNy.mp4) 🥰 𝐒𝐞𝐧𝐝 𝐅𝐫𝐨𝐦 𝐖𝐡𝐞𝐫𝐞 𝐘𝐨𝐮 𝐖𝐚𝐧𝐭 𝐓𝐨 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐈𝐧𝐢𝐭𝐚𝐥 𝐢𝐬 **1**")
+    await editable.edit(f"Total links found are **{len(links)}**\n\nSend From where you want to download initial is **1**")
     input0: Message = await bot.listen(editable.chat.id)
     raw_text = input0.text
     await input0.delete(True)
-    
-    await editable.edit("**Enter Batch Name or send d for grabing from text filename.**")
+    try:
+        arg = int(raw_text)
+    except:
+        arg = 1
+    await editable.edit("**Enter Your Batch Name or send 1 for grabing from text filename.**")
     input1: Message = await bot.listen(editable.chat.id)
     raw_text0 = input1.text
     await input1.delete(True)
-    if raw_text0 == 'd':
+    if raw_text0 == '1':
         b_name = file_name
     else:
         b_name = raw_text0
-     
-    await editable.edit("∝ 𝐄𝐧𝐭𝐞𝐫 𝐄𝐞𝐬𝐨𝐥𝐮𝐭𝐢𝐨𝐧 ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌ https://wdzone.jooker.live/file/3057?code=91fad2c3  🎬\n☞144,240,360,480,720,1080\nPlease Choose Quality")
-    input2: Message = await bot.listen(editable.chat.id) 
+
+    await editable.edit("∝ 𝐄𝐧𝐭𝐞𝐫 𝐄𝐞𝐬𝐨𝐥𝐮𝐭𝐢𝐨𝐧 🎬\n☞ `360` `480`&`720`\nPlease Choose Quality\nsend `480p` for UTKARSH")
+    input2: Message = await bot.listen(editable.chat.id)
     raw_text2 = input2.text
     await input2.delete(True)
     try:
@@ -157,34 +212,36 @@ async def account_login(bot: Client, m: Message):
             res = "1280x720"
         elif raw_text2 == "1080":
             res = "1920x1080" 
+        elif raw_text2 == "480p":
+            res = "480x854" 
         else: 
             res = "UN"
     except Exception:
             res = "UN"
     
-    
-
-    await editable.edit("**💞🐼  𝕊ᵗŘａ𝓃gＥ𝓡 βᵒ𝓨 Ｓ𝕥ᵃ𝕣ţเภﻮ 𝓨Ｏ𝕌𝓡 𝒷𝐨𝐓 https://wdzone.jooker.live/file/3055?code=8f0293f3 💘ඏ Enter Your Name or send `de` for use default**")
-
-    # Listen for the user's response
+    await editable.edit("**Enter Your Name or send '`1`' for use default.\n Eg : ➺꯭ ꯭𝅥‌꯭𝆬‌🦋⃪꯭ ─‌⃛┼ 𝞄⃕𝖋𝖋 STRANGER BOY🥵⃝⃝ᬽ꯭ ⃪꯭ ꯭𝅥‌꯭𝆬‌➺꯭⎯⎯᪵᪳**")
     input3: Message = await bot.listen(editable.chat.id)
-
-    # Get the raw text from the user's message
     raw_text3 = input3.text
-
-    # Delete the user's message after reading it
     await input3.delete(True)
-
     # Default credit message
-    credit = "️ ⁪⁬⁮⁮⁮"
-    if raw_text3 == 'de':
-        CR = '@Strangerboy27_botstrangerboy'
+    credit = "⁮➺꯭ ꯭𝅥‌꯭𝆬‌🦋⃪꯭ ─‌⃛┼ 𝞄⃕𝖋𝖋 STRANGER BOY🥵⃝⃝ᬽ꯭ ⃪꯭ ꯭𝅥‌꯭𝆬‌➺꯭⎯⎯᪵᪳"
+    if raw_text3 == '1':
+        CR = '—‌‌ 𝐈тᷟʑ‌꯭𓄂︪︫︠𓆩〭〬STRANGER BOY⍣⃪‌ ꭗ‌‌𝆺꯭𝅥𔘓༌🪽⎯꯭‌⎯꯭ ꯭'
     elif raw_text3:
         CR = raw_text3
     else:
         CR = credit
-    
-    await editable.edit("▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌ https://envs.sh/aHG.mp4 Now send the Thumb url if don't want thumbnail send no https://envs.sh/JLq.jpg")
+        
+    await editable.edit("**Enter Your PW Token For 𝐌𝐏𝐃 𝐔𝐑𝐋  or send '`0`' for use default**")
+    input4: Message = await bot.listen(editable.chat.id)
+    raw_text4 = input4.text
+    await input4.delete(True)
+    if raw_text4 == '0':
+        MR = token
+    else:
+        MR = raw_text4
+        
+    await editable.edit("Now send the **Thumb url**\n** ``\n\nor Send `no`")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
     await input6.delete(True)
@@ -197,24 +254,17 @@ async def account_login(bot: Client, m: Message):
     else:
         thumb == "no"
 
-    if len(links) == 1:
-        count = 1
-    else:
-        count = int(raw_text)
-
+    count =int(raw_text)    
     try:
-        # Assuming links is a list of lists and you want to process the second element of each sublist
-        for i in range(len(links)):
-            original_url = links[i][1]
+        for i in range(arg-1, len(links)):
 
-            # Replace parts of the URL as needed
-            V = links[i][1].replace("file/d/","uc?export=download&id=")\
-               .replace("www.youtube-nocookie.com/embed", "youtu.be")\
-               .replace("?modestbranding=1", "")\
-               .replace("/view?usp=sharing","")\
-               .replace("youtube.com/embed/", "youtube.com/watch?v=")
-            
-            url = "https://" + V
+            Vxy = links[i][1].replace("file/d/","uc?export=download&id=").replace("www.youtube-nocookie.com/embed", "youtu.be").replace("?modestbranding=1", "").replace("/view?usp=sharing","")
+            url = "https://" + Vxy
+            if "visionias" in url:
+                async with ClientSession() as session:
+                    async with session.get(url, headers={'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9', 'Accept-Language': 'en-US,en;q=0.9', 'Cache-Control': 'no-cache', 'Connection': 'keep-alive', 'Pragma': 'no-cache', 'Referer': 'http://www.visionias.in/', 'Sec-Fetch-Dest': 'iframe', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-Site': 'cross-site', 'Upgrade-Insecure-Requests': '1', 'User-Agent': 'Mozilla/5.0 (Linux; Android 12; RMX2121) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36', 'sec-ch-ua': '"Chromium";v="107", "Not=A?Brand";v="24"', 'sec-ch-ua-mobile': '?1', 'sec-ch-ua-platform': '"Android"',}) as resp:
+                        text = await resp.text()
+                        url = re.search(r"(https://.*?playlist.m3u8.*?)\"", text).group(1)
 
             if "acecwply" in url:
                 cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
@@ -227,15 +277,20 @@ async def account_login(bot: Client, m: Message):
                         url = re.search(r"(https://.*?playlist.m3u8.*?)\"", text).group(1)
 
             elif 'videos.classplusapp' in url or "tencdn.classplusapp" in url or "webvideos.classplusapp.com" in url or "media-cdn-alisg.classplusapp.com" in url or "videos.classplusapp" in url or "videos.classplusapp.com" in url or "media-cdn-a.classplusapp" in url or "media-cdn.classplusapp" in url:
-             url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgzNjkyMTIsIm9yZ0lkIjoyNjA1LCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTcwODI3NzQyODkiLCJuYW1lIjoiQWNlIiwiZW1haWwiOm51bGwsImlzRmlyc3RMb2dpbiI6dHJ1ZSwiZGVmYXVsdExhbmd1YWdlIjpudWxsLCJjb3VudHJ5Q29kZSI6IklOIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJpYXQiOjE2NDMyODE4NzcsImV4cCI6MTY0Mzg4NjY3N30.hM33P2ai6ivdzxPPfm01LAd4JWv-vnrSxGXqvCirCSpUfhhofpeqyeHPxtstXwe0'}).json()['url']
-
+             #url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MTM0Nzg2MzE4LCJvcmdJZCI6MzIzMDUyLCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTk2NDk1NTkyNzAiLCJuYW1lIjoiaGl0ZXNoIiwiZW1haWwiOiJodmxpbWJhMjAwNEBnbWFpbC5jb20iLCJpc0ludGVybmF0aW9uYWwiOjAsImRlZmF1bHRMYW5ndWFnZSI6IkVOIiwiY291bnRyeUNvZGUiOiJJTiIsImNvdW50cnlJU08iOiI5MSIsInRpbWV6b25lIjoiR01UKzU6MzAiLCJpc0RpeSI6dHJ1ZSwib3JnQ29kZSI6InlhbWd1IiwiaXNEaXlTdWJhZG1pbiI6MCwiZmluZ2VycHJpbnRJZCI6ImM4MjEyNjRkZWJsazhmYjNlMmE2MGJkYmQ0ZWY3MmEzYjkiLCJpYXQiOjE3MzkyMDI2MzEsImV4cCI6MTczOTgwNzQzMX0.PrdJGMJYU9lQfzEm5bWDa0S41z1HxLD41lZW80CKutRadgCuENtXKfDIVTteRRT2'}).json()['url']
+             url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6NDcwOTYwODIsIm9yZ0lkIjozNTExODAsInR5cGUiOjEsIm1vYmlsZSI6IjkxODAwNDQ1ODkwNCIsIm5hbWUiOiJzdWppdCB0aXdhcmkiLCJlbWFpbCI6InN1aml0dGl3YXJpMjIxMzA4QGdtYWlsLmM5bSIsImlzSW50ZXJuYXRpb25hbCI6MCwiZGVmYXVsdExhbmd1YWdlIjoiRU4iLCJjb3VudHJ5Q29kZSI6IklOIiwiY291bnRyeUlTTyI6IjkxIiwidGltZXpvbmUiOiJHTVQrNTozMCIsImlzRGl5Ijp0cnVlLCJvcmdDb2RlIjoiYnZqaGkiLCJpc0RpeVN1YmFkbWluIjowLCJmaW5nZXJwcmludElkIjoiMmIzMDFjMzRiODkxZmJhMmE1Y2YyYjYyNDA3NjVhNDIiLCJpYXQiOjE3MjQzMzEwNzcsImV4cCI6MTcyNDkzNTg3N30.0oi58SRgPcKtA-vSoYFBiBh2_dIsGnFnlTak1oaxXZZtAzpEo1omoE5zoc4cim9U'}).json()['url']
+                            
+                          
             elif '/master.mpd' in url:
-             id =  url.split("/")[-2]
-             url =  "https://d26g5bnklkwsh4.cloudfront.net/" + id + "/master.m3u8"
+             vid_id =  url.split("/")[-2]
+             url =  f"https://madxapi-d0cbf6ac738c.herokuapp.com/{vid_id}/master.m3u8?token={raw_text4}"
 
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
-            name = f'{str(count).zfill(3)}) {name1[:60]}'
-                      
+            name = f'—‌‌ 𝐈тᷟʑ‌꯭𓄂︪︫︠𓆩〭〬STRANGER BOY⍣⃪‌ ꭗ‌‌𝆺꯭𝅥𔘓༌🪽⎯꯭‌⎯꯭ ꯭ {name1[:60]}'
+            
+            if 'cpvod.testbook.com' in url:
+               url = requests.get(f'https://mon-key-3612a8154345.herokuapp.com/get_keys?url=https://cpvod.testbook.com/65f02cbd734b790a42d7317f/playlist.m3u8', headers={'x-access-token': 'eyJjb3Vyc2VJZCI6IjQ1NjY4NyIsInR1dG9ySWQiOm51bGwsIm9yZ0lkIjo0ODA2MTksImNhdGVnb3J5SWQiOm51bGx9r'}).json()['url']
+                   
             if "/master.mpd" in url :
                 if "https://sec1.pw.live/" in url:
                     url = url.replace("https://sec1.pw.live/","https://d1d34p8vz63oiq.cloudfront.net/")
@@ -270,84 +325,70 @@ async def account_login(bot: Client, m: Message):
                 cmd = f'yt-dlp --cookies youtube_cookies.txt -f "{ytf}" "{url}" -o "{name}".mp4'
 
             else:
-                cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"
-        
+                cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
+
             try:  
                 
-                cc = f'**🎥 VIDEO ID: {str(count).zfill(3)}.\n\n📄 Title: {name1} {res} ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌.mkv\n\n🚶‍♂️🚶🧨🔖 Batch Name: {b_name}[{CR}]\n\n📥 Extracted By : [{CR}](https://i.ibb.co/0p3pmkwn/Angel.jpg)\n\n**𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 ➤ https://i.ibb.co/m5b9jsD0/STRANGER-BOY.jpg **\n\n📲 APP NAME 📳 {APP}\n'
-                cc1 = f'**📁 FILE ID: {str(count).zfill(3)}.\n\n📄 Title: {name1} ▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌.pdf \n\n🚶‍♂️🚶🧨🔖 Batch Name: {b_name}[{CR}]\n\n📥 Extracted By : [{CR}](https://i.ibb.co/ccV44ZRS/STRANGER-BOY.jpg)\n\n**𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 ➤ https://i.ibb.co/ZzRjhXQp/STRANGER-BOY.jpg **\n\n📲 APP NAME 📳 {APP}\n'
-                    
+                cc = f'**[🎞️] 𝑽𝒊𝒅𝒆𝒐_𝑰𝑫 : {str(count).zfill(3)}**\n\n**𝑽𝒊𝒅𝒆𝒐 𝑵𝒂𝒎𝒆** : {name1}\n**𝑩𝒂𝒕𝒄𝒉 𝑵𝒂𝒎𝒆** : {b_name}\n\n**𝑬𝒙𝒕𝒓𝒂𝒄𝒕𝒆𝒅 𝑩𝒚  : [{CR}](https://graph.org/file/1a43b0e6ab43ec562c6cf-29a3b54e63fef8780a.jpg)**'
+                cc1 = f'**[📁] 𝑭𝒊𝒍𝒆_𝑰𝑫 : {str(count).zfill(3)}**\n\n**𝑭𝒊𝒍𝒆 𝑵𝒂𝒎𝒆** : {name1}\n**𝑩𝒂𝒕𝒄𝒉 𝑵𝒂𝒎𝒆** : {b_name}\n\n**𝑬𝒙𝒕𝒓𝒂𝒄𝒕𝒆𝒅 𝑩𝒚  : [{CR}](https://graph.org/file/d915005a9a1d4cd374600-efc8d0faaa2e600250.jpg)**'                             
+                  
                 
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
                         copy = await bot.send_document(chat_id=m.chat.id,document=ka, caption=cc1)
-                        count+=1
                         os.remove(ka)
+                        count += 1
                         time.sleep(1)
                     except FloodWait as e:
                         await m.reply_text(str(e))
                         time.sleep(e.x)
+                        count += 1
                         continue
-                
+                    finally:
+                        count += 1
+
                 elif ".pdf" in url:
                     try:
+                        # Download PDF logic
                         await asyncio.sleep(4)
-        # Replace spaces with %20 in the URL
                         url = url.replace(" ", "%20")
- 
-        # Create a cloudscraper session
                         scraper = cloudscraper.create_scraper()
-
-        # Send a GET request to download the PDF
                         response = scraper.get(url)
-
-        # Check if the response status is OK
                         if response.status_code == 200:
-            # Write the PDF content to a file
                             with open(f'{name}.pdf', 'wb') as file:
                                 file.write(response.content)
-
-            # Send the PDF document
                             await asyncio.sleep(4)
                             copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)
-                            count += 1
-
-            # Remove the PDF file after sending
                             os.remove(f'{name}.pdf')
                         else:
                             await m.reply_text(f"Failed to download PDF: {response.status_code} {response.reason}")
-
                     except FloodWait as e:
                         await m.reply_text(str(e))
-                        await asyncio.sleep(2)  # Use asyncio.sleep for non-blocking sleep
-                        return  # Exit the function to avoid continuation
-
-                    except Exception as e:
-                        await m.reply_text(f"An error occurred: {str(e)}")
-                        await asyncio.sleep(4)  # You can replace this with more specific
-                        continue
-                        
-                          
+                        time.sleep(e.x)
+                    finally:
+                        count += 1  # Increment count by 1
+               
                 else:
-                    Show = f"❊⟱ 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠 ⟱❊ »\n\n📄 Title:- `{name}\n\n⌨ 𝐐𝐮𝐥𝐢𝐭𝐲 » {raw_text2}`\n\n**🔗 𝐔𝐑𝐋 »** `{url}`"
-                    prog = await m.reply_text(f"**Downloading:-**\n\n**📄 Title:-** `{name}\n\nQuality - {raw_text2}`\n\n**link:**`{url}`\n\n **Bot Made By ▓▒░ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ░▒▓ **")
+                    Show = f"➺꯭ ꯭𝅥‌꯭𝆬‌🦋⃪꯭ ─‌⃛┼ 𝞄⃕𝖋𝖋 Tʜᴇ ʙᴏʏs ᴜᴘʟᴏᴀᴅᴇʀ🥵⃝⃝ᬽ꯭ ⃪꯭ ꯭𝅥‌꯭𝆬‌➺꯭⎯⎯᪵᪳ »\n\n📄 Title:- `{name}\n\n⌨ 𝐐𝐮𝐥𝐢𝐭𝐲 » {raw_text2}`\n\n**🔗 𝐔𝐑𝐋 »** `{url}`\n\n**𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 📵 ❛ .𝁘ໍTʜᴇ ʙᴏʏs ᴜᴘʟᴏᴀᴅᴇʀꨄ 🦋𓂃• "
+                    prog = await m.reply_text(Show)
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
                     await prog.delete(True)
                     await helper.send_vid(bot, m, cc, filename, thumb, name, prog)
-                    count += 1
                     time.sleep(1)
+                    count += 1
 
             except Exception as e:
                 await m.reply_text(
-                    f"⌘ 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠 😡🤬😈👿☠️💔𝐈𝐧𝐭𝐞𝐫𝐮𝐩𝐭𝐞𝐝\n\n⌘ 𝐍𝐚𝐦𝐞 » {name}\n⌘ 𝐋𝐢𝐧𝐤 » `{url}`"
+                    f"⌘ 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠 𝐈𝐧𝐭𝐞𝐫𝐮𝐩𝐭𝐞𝐝\n\n⌘ 𝐍𝐚𝐦𝐞 » {name}\n⌘ 𝐋𝐢𝐧𝐤 » `{url}`"
                 )
+                count += 1
                 continue
 
     except Exception as e:
         await m.reply_text(e)
-    await m.reply_text("♐️▌│█║▌║▌║ 𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥 𝗕𝗢𝗬 𝗥𝗢𝗛𝗜𝗧 ║▌║▌║█│▌ https://envs.sh/aHK.mp4 Complete ho gya Kar le sell ab🛐")
+    await m.reply_text("⋆⎯፝֟፝֟⎯᪵ 𝆺꯭𝅥Tʜᴇ ʙᴏʏs ᴜᴘʟᴏᴀᴅᴇʀ ᭄꯭🦋꯭᪳᪳᪻⎯‌⎯🐣")
 
 
 
